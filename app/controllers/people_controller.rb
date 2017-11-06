@@ -5,8 +5,7 @@ class PeopleController < ApplicationController
   # GET /people.json
   def index
     @people = Person.all
-    names = Person.all.map(&:name).shuffle
-    @groups = names.each_slice(4).to_a
+    @groups = generate_groups(@people)
   end
 
   # GET /people/1
@@ -64,6 +63,7 @@ class PeopleController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_person
       @person = Person.find(params[:id])
@@ -72,5 +72,31 @@ class PeopleController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
       params.require(:person).permit(:name)
+    end
+
+    def generate_groups people
+      names = people.map(&:name).shuffle
+      if names.length == 0
+        return [[]]
+      elsif names.length <= 5
+        return names.each_slice(5).to_a
+      elsif names.length == 6
+        return names.each_slice(3).to_a
+      else
+        return rebalance(names.each_slice(4).to_a)
+      end
+    end
+
+    def rebalance groups
+      last = groups.last
+      if last.length % 4 == 1
+        groups[0] << last.pop
+        groups.pop
+      elsif last.length % 4 == 2
+        groups[0] << last.pop
+        groups[1] << last.pop
+        groups.pop
+      end
+      groups
     end
 end
