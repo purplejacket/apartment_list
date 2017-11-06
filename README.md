@@ -1,24 +1,27 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the "Family Friday" code challenge as described here:
 
-Things you may want to cover:
+https://gist.github.com/sarahwiemero/0aa5ff2d24196c65880936bbe80f6c52
 
-* Ruby version
+excerpt from that link:
 
-* System dependencies
+```
+On the last Friday of every month, Apartment List abandons the convenience of our usual catered lunch in favor of getting some fresh air. The more we grow, the harder it is to see people who aren't on our immediate teams, so we shuffle ourselves into random groups for a chance to talk to (or even meet for the first time) people we otherwise miss out on.
+```
 
-* Configuration
+This repository has two basic solutions to the challenge.
 
-* Database creation
+The first is a self-contained script-cum-database: `lunch.rb`.  This is an executable ruby file that can be run on the command line to produce the desired random groupings.  Near the top of the script is a listing of names.  This is the "database" of people who are going out to lunch.
 
-* Database initialization
+The above solution was motivated by the following:  Easy to implement, very minimal, and anyone with a Mac or who has Ruby installed could run and maintain this.  Unfortunately it breaks this requirement:
 
-* How to run the test suite
+```
+Usability:
+Someone relatively non-technical should be able to operate your program, which means some kind of CLI or GUI. What it shouldn't be is typing code into a console or editing data by hand.
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Hence solution 2:
 
-* Deployment instructions
+This is a very simple, minimally scaffolded Rails app that basically takes the above solution and inlines it into the index.html.erb view.  So the CRUD functionality is provided by Rails, and every time a reload is performed the lunch groups are updated.
 
-* ...
