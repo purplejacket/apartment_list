@@ -5,6 +5,8 @@ class PeopleController < ApplicationController
   # GET /people.json
   def index
     @people = Person.all
+    names = Person.all.map(&:name).shuffle
+    @groups = names.each_slice(4).to_a
   end
 
   # GET /people/1

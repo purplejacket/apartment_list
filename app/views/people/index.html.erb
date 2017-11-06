@@ -22,6 +22,21 @@
   </tbody>
 </table>
 
-<br>
-
 <%= link_to 'New Person', new_person_path %>
+
+<br>
+<hr>
+
+<h1>Lunch Groups</h1>
+
+<ol>
+  <% @groups.each_with_index do |group, index| %>
+    <li>
+      <ul>
+        <% group.each do |name| %>
+          <li><%= name %></li>
+        <% end %>
+      </ul>
+    </li>
+  <% end %>
+</ol>
